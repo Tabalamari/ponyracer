@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PonyModel } from './pony-model.interface';
 @Component({
     selector: 'ns-pony',
-    template: `<div click="selectPony">{{ pony.id}} {{pony.name }}</div>`, standalone: true
+    template: `<div (click) ="selectPony()">{{ pony.id}} {{pony.name }}</div>`, standalone: true
 })
 export class PonyComponent {
     @Input() pony!: PonyModel;
