@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PonyModel } from './pony-model.interface';
+import { PonyComponent } from './pony.component';
 
 @Component({
     selector: 'ns-ponies',
@@ -7,16 +9,16 @@ import { CommonModule } from '@angular/common';
     <div><button style = "margin-top: 20px" (click)="refreshPonies()">Refresh</button></div>
     <ul>
        <li *ngFor="let pony of ponies; even as isEven" [style.color] = "isEven ? 'green' : 'black'">{{ pony.name }}</li>
+       <ns-pony  *ngFor="let currentPony of ponies" [pony]="currentPony"></ns-pony>
     </ul>`,
     standalone: true,
-    imports: [CommonModule]
+    imports: [CommonModule, PonyComponent]
 })
 export class PoniesComponent {
 
-    ponies: Array<PonyModel> = [{ name: 'Rainbow Dash' }, { name: 'Pinkie Pie' }];
+    ponies: Array<PonyModel> = [{ id: 1, name: 'Rainbow Dash' }, {id: 2, name: 'Pinkie Pie' }];
     refreshPonies() {
-        this.ponies = [{ name: 'Fluttershy'}, {name: 'Rarity'}]
+        this.ponies = [{ id: 3, name: 'Fluttershy'}, { id:4, name: 'Rarity'}]
     }
 }
 
-interface PonyModel { name: string }
