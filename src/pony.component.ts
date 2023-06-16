@@ -4,13 +4,20 @@ import { OnInitDirective } from './initDirective';
 
 @Component({
     selector: 'ns-pony',
-    template: `<div class="pink" (click) ="selectPony()" [initDirective] = "pony">{{ pony.id}} {{ pony.name }}</div>`, 
+    template: `<div class="pink" (click) ="selectPony()" [initDirective] = "pony">{{ pony.id}} {{ pony.name }}</div>
+    <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, sint!</div>`,
     standalone: true,
-    imports: [ OnInitDirective],
+    imports: [OnInitDirective],
     styles: [
         `.pink {
-        color: pink; }
-        `],
+            color: pink;
+        }
+        `,
+        `* {
+            color: green;
+        }
+        `
+    ],
     encapsulation: ViewEncapsulation.Emulated
 })
 export class PonyComponent {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PonyModel } from './pony-model.interface';
 import { PonyComponent } from './pony.component';
@@ -10,9 +10,10 @@ import { PonyComponent } from './pony.component';
     <ul>
        <!-- <li *ngFor="let pony of ponies; even as isEven" [style.color] = "isEven ? 'green' : 'black'">{{ pony.name }}</li> -->
        <ns-pony *ngFor="let currentPony of ponies" [pony]="currentPony" (ponySelected)="betOnPony($event)"></ns-pony>
-    </ul>`,
+    </ul>
+    <div class="pink">Ffffff</div>`,
     standalone: true,
-    imports: [CommonModule, PonyComponent]
+    imports: [CommonModule, PonyComponent],
 })
 export class PoniesComponent {
 
