@@ -11,7 +11,12 @@ import { PonyComponent } from './pony.component';
        <!-- <li *ngFor="let pony of ponies; even as isEven" [style.color] = "isEven ? 'green' : 'black'">{{ pony.name }}</li> -->
        <ns-pony *ngFor="let currentPony of ponies" [pony]="currentPony" (ponySelected)="betOnPony($event)"></ns-pony>
     </ul>
-    <div class="pink">Ffffff</div>`,
+    <div class="pink">Ffffff</div>
+    <div>{{ ponies | slice:0:2 | json }}, "HERE ARE PONIES in an interpolation expression"</div>
+    
+    <div *ngFor="let pony of ponies | slice : 0 : 2"> {{pony | json}}"HERE ARE PONIES in an property expression through ngFor"</div>
+    <p [textContent]="ponies | json">"HERE ARE PONIES in a property expression"<p>
+    <p>{{ 'Ninja Squad' | slice:0:5 }}</p>`,
     standalone: true,
     imports: [CommonModule, PonyComponent],
 })
