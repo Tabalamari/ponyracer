@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, KeyValue } from '@angular/common';
 import { PonyModel } from './pony-model.interface';
 import { PonyComponent } from './pony.component';
 
@@ -16,18 +16,47 @@ import { PonyComponent } from './pony.component';
 
     <div *ngFor="let pony of ponies | slice : 0 : 2"> {{pony | json}}"HERE ARE PONIES in an property expression through ngFor"</div>
     <div *ngFor="let pony of ponies | slice : 0 : size"> {{pony | json}}"HERE ARE PONIES in an property expression through ngFor with dynamic argument"</div>
-    <!-- <p>You can use this to create a dynamic display where your user chooses how many elements she/he wants to see.</p> -->
+    <p>You can use this to create a dynamic display where your user chooses how many elements she/he wants to see.</p>
     <div *ngFor="let pony of ponies | slice : 0 : 2 as total; index as i">
-        {{ i + 1 }}/{{ total.length }}: {{ pony.name }}
-    </div>
-    <p [textContent]="ponies | json">"HERE ARE PONIES in a property expression"<p>
-    <p>{{ 'Ninja Squad' | slice:0:5 }}</p>`,
+        "pipe slice" {{ i + 1 }}/{{ total.length }} : {{ pony.name }}
+    </div> 
+
+    <p [textContent]="ponies | json">"HERE ARE PONIES in a property expression"</p>
+    <p>{{ 'Ninja Squad' | slice:0:5 }}</p>
+    
+    <ul>
+        <p>KEYVALUE</p>
+        <p> entry contains  key: number, value: PonyModel  </p>
+        <li *ngFor="let entry of poniesMap | keyvalue">{{ entry.key }} - {{ entry.value.name | lowercase }}</li>
+    </ul>
+            <!-- entry contains { key: PonyModel, value: number } -->
+    <div *ngFor="let entry of poniesWithScore | keyvalue : ponyComparator">{{ entry.key.name | uppercase }} - {{ entry.value }}</div>
+    `,
     standalone: true,
     imports: [CommonModule, PonyComponent],
 })
 export class PoniesComponent {
     size = 2;
     ponies: Array<PonyModel> = [{ id: 1, name: 'Rainbow Dash' }, { id: 2, name: 'Pinkie Pie' }];
+    poniesMap = new Map<number, PonyModel>();
+    poniesWithScore = new Map<PonyModel, number>();
+
+    constructor() {
+        this.poniesMap.set(12, { id: 1, name: 'Rainbow Dash' })
+        this.poniesMap.set(23, { id: 2, name: 'Grinbow Mash' })
+        this.poniesMap.set(54, { id: 3, name: 'Denbow Slash' })
+        this.poniesWithScore.set({ id: 4, name: 'Rainbow Dash' }, 430)
+        this.poniesWithScore.set({ id: 5, name: 'Rainbow Dash' }, 680)
+        this.poniesWithScore.set({ id: 6, name: 'Pinkie Pie' }, 125);
+    }
+
+    ponyComparator(a: KeyValue<PonyModel, number>, b: KeyValue<PonyModel, number>): -1 | 0 | 1 {
+        if (a.key.name === b.key.name) {
+            return 0;
+        }
+        return a.key.name < b.key.name ? -1 : 1;
+    }
+
     refreshPonies() {
         this.ponies = [{ id: 3, name: 'Fluttershy' }, { id: 4, name: 'Rarity' }]
     }
