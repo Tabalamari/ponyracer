@@ -31,6 +31,35 @@ import { PonyComponent } from './pony.component';
     </ul>
             <!-- entry contains { key: PonyModel, value: number } -->
     <div *ngFor="let entry of poniesWithScore | keyvalue : ponyComparator">{{ entry.key.name | uppercase }} - {{ entry.value }}</div>
+
+    <h1>NUMBERS</h1>
+    
+    <p>{{ 12345 }}</p>
+    <p>{{ 12345 | number}}</p>
+    <p>{{ 12345 | number: '6.'}}</p>
+    <p>{{ 12345 | number:'.2' }}</p>
+    <p>{{ 12345.13 | number:'.1-1' }}</p>
+    <p>{{ 12345.16 | number:'.1-1' }}</p>
+    <p>{{ 12345.12345 | number:'.2-3' }} khglyfuyf</p>
+    
+    <h1>PERSENT</h1>
+    <p>{{ 0.8 | percent }}</p>
+    <p>{{ 0.8 | percent:'.3' }}</p>
+    <p>{{ 0.8 | percent:'5.' }}</p>
+
+    <h1>CURRENCY</h1>
+    <p>{{ 10.6 | currency:'CAD' }}</p>
+    <!-- will display 'CA$10.60' -->
+    <p>{{ 10.6 | currency:'CAD':'symbol-narrow' }}</p> 
+    <!-- will display '$10.60' -->
+    <p>{{ 10.6 | currency:'EUR':'code':'.3' }}</p>
+    <!-- will display 'EUR10.600' -->
+
+    <p>{{ 10.6 | currency:'UAH':'symbol-narrow' }}</p> 
+    <!-- will display '₴10.60' -->
+    <p>{{ 10.6 | currency:'UAH':'symbol' }}</p> 
+    <!-- will display 'UAH' -->
+    
     `,
     standalone: true,
     imports: [CommonModule, PonyComponent],
