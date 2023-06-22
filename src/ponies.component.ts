@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule, KeyValue } from '@angular/common';
 import { PonyModel } from './pony-model.interface';
 import { PonyComponent } from './pony.component';
+import { GreetingComponent } from './greeting.component';
 
 @Component({
     selector: 'ns-ponies',
@@ -59,16 +60,26 @@ import { PonyComponent } from './pony.component';
     <!-- will display '₴10.60' -->
     <p>{{ 10.6 | currency:'UAH':'symbol' }}</p> 
     <!-- will display 'UAH' -->
-    
+    <h1>DATE</h1>
+    <p>{{ birthday | date:'dd/MM/yyyy' }}</p>
+    <p>{{ birthday }}</p>
+    <p>{{ birthday | date:'longDate' }}</p>
+    <p>{{ birthday | date:'shortDate' }}</p>
+    <p>{{ birthday | date:'HH:mm' }}</p>
+    <p>{{ birthday | date:'shortTime' }}</p>
+    <p>{{ birthday | date:'longTime' }}</p>
+    <ns-greeting></ns-greeting>
     `,
     standalone: true,
-    imports: [CommonModule, PonyComponent],
+    imports: [CommonModule, PonyComponent, GreetingComponent]
 })
 export class PoniesComponent {
     size = 2;
     ponies: Array<PonyModel> = [{ id: 1, name: 'Rainbow Dash' }, { id: 2, name: 'Pinkie Pie' }];
     poniesMap = new Map<number, PonyModel>();
     poniesWithScore = new Map<PonyModel, number>();
+    birthday = new Date(1979, 5, 13);
+
 
     constructor() {
         this.poniesMap.set(12, { id: 1, name: 'Rainbow Dash' })
