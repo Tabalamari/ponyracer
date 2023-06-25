@@ -71,7 +71,7 @@ import { FromNowPipe } from './from-now.pipe'
     <p>{{ birthday | date:'shortTime' }}</p>
     <p>{{ birthday | date:'longTime' }}</p>
     <ns-greeting></ns-greeting>
-    <p>{{ "13/06/1979" | fromNow }}</p>
+    <p>{{ "2023-02-10T10:00:00.000Z" | fromNow }}</p>
     `,
     standalone: true,
     imports: [CommonModule, PonyComponent, GreetingComponent, FromNowPipe]
