@@ -1,1 +1,1 @@
-export interface PonyModel { id: number, name: string }
+export interface PonyModel { id: number, name: string, speed: number }

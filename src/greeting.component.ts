@@ -21,6 +21,6 @@ export class GreetingComponent {
     });
     asyncUser = new Promise<PonyModel>(resolve => {
         // after 1 second, the promise will resolve 
-        window.setTimeout(() => resolve({ id: 42, name: 'Cédric' }), 4000);
+        window.setTimeout(() => resolve({ id: 42, name: 'Cédric', speed:  20 }), 4000);
     });
 }

@@ -3,13 +3,15 @@ import { CommonModule, KeyValue } from '@angular/common';
 import { PonyModel } from './pony-model.interface';
 import { PonyComponent } from './pony.component';
 import { GreetingComponent } from './greeting.component';
+import { FromNowPipe } from './from-now.pipe'
 
 @Component({
     selector: 'ns-ponies',
     template: `
     <div><button style = "margin-top: 20px" (click)="refreshPonies()">Refresh</button></div>
+    <div>{{ ponies | json }}</div>
     <ul>
-       <!-- <li *ngFor="let pony of ponies; even as isEven" [style.color] = "isEven ? 'green' : 'black'">{{ pony.name }}</li> -->
+       <li *ngFor="let pony of ponies; even as isEven" [style.color] = "isEven ? 'green' : 'black'">{{ pony.name }}</li>
        <ns-pony *ngFor="let currentPony of ponies" [pony]="currentPony" (ponySelected)="betOnPony($event)"></ns-pony>
     </ul>
     <div class="pink">Ffffff</div>
@@ -69,25 +71,27 @@ import { GreetingComponent } from './greeting.component';
     <p>{{ birthday | date:'shortTime' }}</p>
     <p>{{ birthday | date:'longTime' }}</p>
     <ns-greeting></ns-greeting>
+    <p>{{ "13/06/1979" | fromNow }}</p>
     `,
     standalone: true,
-    imports: [CommonModule, PonyComponent, GreetingComponent]
+    imports: [CommonModule, PonyComponent, GreetingComponent, FromNowPipe]
 })
 export class PoniesComponent {
     size = 2;
-    ponies: Array<PonyModel> = [{ id: 1, name: 'Rainbow Dash' }, { id: 2, name: 'Pinkie Pie' }];
+    ponies: Array<PonyModel> = [{ id: 1, name: 'Rainbow Dash', speed: 30 }, { id: 2, name: 'Pinkie Pie', speed: 40 }];
     poniesMap = new Map<number, PonyModel>();
     poniesWithScore = new Map<PonyModel, number>();
     birthday = new Date(1979, 5, 13);
 
 
     constructor() {
-        this.poniesMap.set(12, { id: 1, name: 'Rainbow Dash' })
-        this.poniesMap.set(23, { id: 2, name: 'Grinbow Mash' })
-        this.poniesMap.set(54, { id: 3, name: 'Denbow Slash' })
-        this.poniesWithScore.set({ id: 4, name: 'Rainbow Dash' }, 430)
-        this.poniesWithScore.set({ id: 5, name: 'Rainbow Dash' }, 680)
-        this.poniesWithScore.set({ id: 6, name: 'Pinkie Pie' }, 125);
+        this.ponies = [{ id: 3, name: 'Fluttershy', speed: 30 }, { id: 4, name: 'Rarity', speed: 30 }]
+        this.poniesMap.set(12, { id: 1, name: 'Rainbow Dash', speed: 30 })
+        this.poniesMap.set(23, { id: 2, name: 'Grinbow Mash', speed: 30 })
+        this.poniesMap.set(54, { id: 3, name: 'Denbow Slash', speed: 30 })
+        this.poniesWithScore.set({ id: 4, name: 'Rainbow Dash', speed: 30 }, 430)
+        this.poniesWithScore.set({ id: 5, name: 'Rainbow Dash', speed: 30 }, 680)
+        this.poniesWithScore.set({ id: 6, name: 'Pinkie Pie', speed: 30 }, 125);
     }
 
     ponyComparator(a: KeyValue<PonyModel, number>, b: KeyValue<PonyModel, number>): -1 | 0 | 1 {
@@ -98,7 +102,7 @@ export class PoniesComponent {
     }
 
     refreshPonies() {
-        this.ponies = [{ id: 3, name: 'Fluttershy' }, { id: 4, name: 'Rarity' }]
+        this.ponies = [{ id: 3, name: 'Fluttershy', speed: 30 }, { id: 4, name: 'Rarity', speed: 30 }]
     }
 
     betOnPony(pony: PonyModel) {
