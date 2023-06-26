@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RacesComponent } from '../races.component';
 import { PoniesComponent } from "../ponies.component";
+import { RaceService } from 'src/race.service';
+import { RaceModel } from 'src/race-model.interface';
 
 @Component({
     selector: 'ns-root',
@@ -22,4 +24,9 @@ export class AppComponent {
     user = { name: 'Cédric' };
     isHidden: any;
     foreground = "blue";
+    races: Array<RaceModel>;
+    constructor(private raceService: RaceService) 
+    { 
+        this.races = this.raceService.list();
+    }
 }

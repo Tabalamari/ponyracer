@@ -6,7 +6,7 @@ import { formatDistanceToNowStrict, parseISO } from 'date-fns';
     standalone: true
 })
 export class FromNowPipe implements PipeTransform {
-    transform(value: string, args: Array<unknown>): string {
+    transform(value: string): string {
         const date = parseISO(value);
         return formatDistanceToNowStrict(date, { addSuffix: true });
     }
