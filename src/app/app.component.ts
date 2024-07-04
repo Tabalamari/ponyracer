@@ -16,6 +16,7 @@ import { RaceModel } from 'src/race-model.interface';
 
             <ns-races></ns-races>
             <ns-ponies></ns-ponies>
+            <div>{{races| json}}</div>
     </div>`,
     styleUrls: ['./app.component.css'],
     imports: [RacesComponent, CommonModule, PoniesComponent]

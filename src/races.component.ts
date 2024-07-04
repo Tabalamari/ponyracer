@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RaceService } from './race.service';
 @Component({
     selector: 'ns-races',
     template: `<div *ngIf="races.length > 0; else empty">
@@ -37,7 +38,7 @@ import { CommonModule } from '@angular/common';
 <input type="text" #name>
 <button (click)="name.focus()">Focus the input</button>
 <button (click)="fokusPokus(name)">Focus the input</button>
-
+<div>{{races| json}}</div>
 `,
     standalone: true,
     imports: [CommonModule],
@@ -48,7 +49,10 @@ export class RacesComponent {
     firstName: string = "";
     lastName: string = "";
     messageCount = "";
-
+    constructor(private raceService: RaceService) 
+    { 
+        this.races = this.raceService.list();
+    }
 
     refreshRaces(): void {
         this.races = [{ name: 'London' }, { name: 'Lyon' }];

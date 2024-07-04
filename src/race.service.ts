@@ -10,6 +10,6 @@ export class RaceService {
 
     list(): Array<RaceModel> {
         this.loggingService.log('race-service: get races');
-        return [{name: "Race1"}]
+        return [{name: "Race1"}, {name: "Race2"}]
     }
 }
